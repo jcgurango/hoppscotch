@@ -147,6 +147,11 @@ const sendMagicLink = async (email: string) => {
     throw new Error('test: does not get device identifier');
   }
   setLocalConfig('deviceIdentifier', res.data.deviceIdentifier);
+
+  if (res.data?.redirectUrl) {
+    window.location.href = res.data?.redirectUrl;
+  }
+
   return res.data;
 };
 

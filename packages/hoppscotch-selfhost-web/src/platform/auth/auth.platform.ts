@@ -190,6 +190,10 @@ async function sendMagicLink(email: string) {
     throw new Error("test: does not get device identifier")
   }
 
+  if (res.data && res.data.redirectUrl) {
+    window.location.href = res.data.redirectUrl;
+  }
+
   return res.data
 }
 

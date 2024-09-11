@@ -234,6 +234,13 @@ export class AuthService {
         url = this.configService.get('VITE_BASE_URL');
     }
 
+    if (this.configService.get('EMAIL_JUST_LOGIN')) {
+      return {
+        deviceIdentifier: generatedTokens.deviceIdentifier,
+        redirectUrl: `${url}/enter?token=${generatedTokens.token}`,
+      };
+    }
+
     await this.mailerService.sendEmail(email, {
       template: 'user-invitation',
       variables: {

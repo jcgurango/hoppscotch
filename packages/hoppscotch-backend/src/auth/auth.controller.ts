@@ -65,6 +65,11 @@ export class AuthController {
       authData.email,
       origin,
     );
+
+    if ('redirectUrl' in deviceIdToken) {
+      return deviceIdToken;
+    }
+
     if (E.isLeft(deviceIdToken)) throwHTTPErr(deviceIdToken.left);
     return deviceIdToken.right;
   }
